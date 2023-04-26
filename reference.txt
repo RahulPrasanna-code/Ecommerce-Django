@@ -1,0 +1,40 @@
+-Seller
+    - id
+    - name
+    - email
+    - password
+    - rating
+    - address
+
+-Buyer
+    - id
+    - name
+    - email
+    - password
+    - contact
+
+-Address
+    - id
+    - Buyer
+    - address
+
+-Product
+    - id
+    - name
+    - description
+    - price
+    - Seller
+    - available_quantity
+    - rating
+
+-OrderItem(Cart)
+    - id
+    - Product
+    - quantity
+
+-Order
+    - total_price
+    - Buyer
+    - date
+    - status
+

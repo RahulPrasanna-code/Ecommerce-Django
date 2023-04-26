@@ -1,0 +1,44 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'users/css/login_user_style.css' %}">
+    </head>
+    <body>
+        <main>
+            <div class="leftpart">
+                <form method="POST" class="signupform"> {% csrf_token %}
+                    <h2>LOGIN</h2>
+                    <ul class="errormessage">
+                    {% for error in form.username.errors%}
+                        <li>{{error}}</li>
+                    {% endfor %}
+                    </ul>
+                    <div class="inputfieldblock">
+                        <label for="displayname">Your name</label>
+                        {% render_field form.username placeholder='username'%}
+                    </div>
+                    <div class="inputfieldblock">
+                        <label for="username">username/email</label>
+                        {% render_field form.password placeholder='password'%}
+                    </div>
+                    <button type="submit">login</button>
+                    <a href="#">New User? Signup</a>
+                </form>
+            </div>
+            <div class="rightpart">
+                <h2 class="info">
+                    Login to Live-Commerce <br>
+                    Start selling your live stock products <br>
+                    on the largest livestock market
+                </h2>
+            </div>
+        </main>
+    </body>
+</html>

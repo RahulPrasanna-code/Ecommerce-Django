@@ -1,0 +1,60 @@
+{% load widget_tweaks%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Create User</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static 'users/css/create_user_style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    </head>
+    <body>
+        <main>
+            <div class="left-part">
+                <h2 class="info">
+                    Login to Live-Commerce <br>
+                    Start selling your live stock products <br>
+                    on the largest livestock market
+                </h2>
+            </div>
+            <div class="rightpart">
+                <form method="POST" class="signupform"> {% csrf_token %}
+                    <h2>SIGNUP</h2>
+                    <ul class="errormessage">
+                    {% for error in form.password2.errors%}
+                        <li>{{error}}</li>
+                    {% endfor %}
+                    </ul>
+                    <div class="inputfieldblock">
+                        <label for="displayname">Your name</label>
+                        {% render_field form.display_name placeholder='displayname'%}
+                    </div>
+                    <div class="inputfieldblock">
+                        <label for="username">username/email</label>
+                        {% render_field form.username placeholder='username'%}
+                    </div>
+                    <div class="inputfieldblock">
+                        <label for="username">contact no</label>
+                        {% render_field form.contact_no placeholder='contact no'%}
+                    </div>
+                    <div class="inputfieldblock">
+                        <label for="password">password</label>
+                        {% render_field form.password1 placeholder='password'%}
+                    </div>
+                    <div class="inputfieldblock">
+                        <label for="retype password">re-enter your password</label>
+                        {% render_field form.password2 placeholder='retype password'%}
+                    </div>
+                    <button type="submit">Signup</button>
+                    <a href="{% url 'login' %}">Already Have an account ?</a>
+                </form>
+            </div>
+        </main>
+        
+        <script src="" async defer></script>
+    </body>
+</html>

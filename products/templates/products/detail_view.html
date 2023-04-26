@@ -1,0 +1,94 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <img src="{{product.image_url}}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{product.get_category_display}}</span>
+              </a>
+              <a href="">
+                <span class="badge badge-pill {{product.get_label_display}}-color"> {{product.label}}</span>
+              </a>
+            </div>
+
+            <p class="lead">
+              <span>${{product.price}}</span>
+            </p>
+
+            <p class="lead font-weight-bold">{{product.name}}</p>
+
+            <p>{{product.description}}</p>
+            
+            {% if in_cart %}
+              <p style="color: red;">*The product is already in cart</p><br>
+            {% endif %}
+
+            <form method="POST" action="{% url 'add_to_cart'%}" class="d-flex justify-content-left">
+              {% csrf_token %}  
+              <!-- Default input -->
+              {% if cart_item is not None %}
+                <input name="quantity" type="number" min="1" value="{{cart_item.quantity}}" aria-label="Search" class="form-control" style="width: 60px">
+              {% else %}
+                <input name="quantity" type="number" min="1" value="1" aria-label="Search" class="form-control" style="width: 60px">
+              {% endif %}  
+                <input type="hidden" name="product_id" value="{{product.id}}">
+                <button class="btn btn-primary btn-md my-0 p" type="submit">
+                  {% if in_cart %}
+                    Modify
+                  {% else %}
+                    Add to cart
+                  {% endif %}
+                  <i class="fas fa-shopping-cart ml-1"></i>
+                </button>
+  
+              </form>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="#"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+{%endblock%}

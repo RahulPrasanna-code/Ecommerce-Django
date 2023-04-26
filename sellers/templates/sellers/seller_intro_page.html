@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'sellers/css/seller_intro_page_style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    
+    </head>
+    <body>
+        <header class="navbar">
+            <h2 class="appname">Live-Commerce</h2>  
+            <nav>
+                <ul class="navlinks">
+                    <li><a href="#" class="seller_link">Not a seller? Know how to become one!</a></li>
+                    <li><a href="{% url 'seller_login' %}"><button>LOGIN</button></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <img src="{% static '\sellers\images\social-ecommerce-trends.jpg' %}" alt="">
+            
+            <div class="right-part">
+                <h2 class="info">
+                    Welcome to Live-Commerce <br>
+                    Start selling wide range of live stock products
+                </h2>
+
+                <a href="{%url 'seller_login'%}">Login and start sellin products now!!<i class="bi bi-arrow-right"></i></a> 
+            </div>
+        </main>
+    </body>
+</html>

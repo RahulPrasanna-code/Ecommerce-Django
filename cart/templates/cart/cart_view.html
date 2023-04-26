@@ -1,0 +1,110 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+    main{
+        margin-top: 30px;
+        padding: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cart_card{
+        width: 70%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 20px;
+    }
+
+    .cart_card_top{
+        display: flex;
+        align-items: center;
+    }
+
+    .price_block{
+        display: flex;
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 180px;
+        margin-left: 30px;
+    }
+
+    .qty span{
+        font-weight: bold;
+    }
+
+    .price{
+        margin-left: 20px;
+    }
+
+    .price span{
+        font-weight: bold;
+    }
+
+    .overall_price span{
+        color: rgb(255, 102, 0);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bolder;
+        font-size: 20px;
+    }
+
+    .cart_card_top img{
+        width: 250px;
+        height: 200px;
+    }
+
+    .cart_card_bottom{
+        display: flex;
+    }
+
+    .cart_card_bottom a{
+        width: 50%;
+    }
+
+    .cart_card_bottom a button{
+        width: 100%;
+    }
+
+    .cart_card_bottom form{
+        width:50%
+    }
+
+    .cart_card_bottom form button{
+        width:100%
+    }
+</style>
+{% endblock %}
+{%block content%}
+    <main>
+        {% for item in cart_items %}
+            <div class="cart_card">
+                <div class="cart_card_top">
+                    <div class="image_holder">
+                        <img class="myimage" src="{{item.product.image_url}}" alt="">
+                    </div>
+                    <div class="content">
+                        <a href="{% url 'product_detail_view' item.product.id %}"> <h3>{{item.product.name}} </h3></a>
+                        <div class="price_block">    
+                            <p class="qty"><span>Qty</span> : {{item.quantity}}</p>
+                            <p class="price"><span>Price</span> : {{item.product.price}}</p>
+                        </div>
+                        <p class="overall_price"><span>Overall</span> : {{item.get_product_total}}</p>
+                    </div>    
+                </div>
+                <div class="cart_card_bottom">
+                    <a href="{%url 'product_detail_view' item.product.id%}"><button class="btn btn-primary btn-md my-0 p" style="margin: 0px;border-radius:0px;">modify</button></a>
+                    <form method="POST" action="{%url 'delete_from_cart'%}">{% csrf_token %}
+                        <input type="hidden" value="{{ item.id }}" name="item_id">
+                        <button type="submit" class="btn btn-danger btn-md my-0 p" style="margin: 0px;border-radius:0px;">remove</button>
+                    </form>
+                    
+                </div>
+            </div>
+        {% endfor %}
+        
+    </main>
+{%endblock content%}
